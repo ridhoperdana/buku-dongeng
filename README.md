@@ -1,6 +1,6 @@
 # Buku Dongeng
 
-This web based application is for learning purposes. I created this web app so that i can teach my son about animals and other things that has unique sound and pictures. Feel free to form to make your own version!
+This web based application is for learning purposes. I created this web app so that i can teach my son about animals and other things that has unique sound and pictures. Feel free to fork to make your own version!
 
 ## Features
 1. List of animals
