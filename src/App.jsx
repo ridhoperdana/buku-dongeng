@@ -46,10 +46,20 @@ const App = () => {
     const listRef = useRef(null);
     const [isFirstVisible, setIsFirstVisible] = useState(true);
     const [isLastVisible, setIsLastVisible] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const handlePlaySound = (soundURL) => {
         const audio = new Audio(soundURL);
         audio.play();
+    };
+
+    // Detect if the user is on desktop (large screen) or mobile
+    const checkDevice = () => {
+        if (window.innerWidth > 768) {
+            setShowModal(true); // Show modal if on desktop
+        } else {
+            setShowModal(false); // Hide modal if on mobile
+        }
     };
 
     const slideList = (direction) => {
@@ -74,6 +84,13 @@ const App = () => {
     };
 
     useEffect(() => {
+        checkDevice(); // Check on initial load
+        window.addEventListener('resize', checkDevice); // Listen for window resize
+
+        return () => {
+            window.removeEventListener('resize', checkDevice);
+        };
+
         const list = listRef.current;
         if (!list) return;
 
@@ -178,7 +195,22 @@ const App = () => {
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-blue-100">
+        <div className={`flex flex-col items-center min-h-screen bg-blue-100 ${showModal ? 'blurred' : ''}`}>
+            {/* Modal for Desktop Access */}
+            {showModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-white p-8 rounded-lg text-center">
+                        <h2 className="text-xl font-semibold">Please access this web app on a mobile device!</h2>
+                        <p className="mt-4 text-gray-600">This app is optimized for mobile use.</p>
+                        <button
+                            onClick={() => setShowModal(false)}
+                            className="bg-blue-500 text-white py-2 px-6 rounded mt-4"
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            )}
             {/* Logo */}
             <div className="w-full p-4 bg-gray-800 text-white text-center">
                 <h1 className="text-xl">BukuDongeng</h1>
