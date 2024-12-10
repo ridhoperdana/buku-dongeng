@@ -19,7 +19,7 @@ const imageUploader = [
             "Hewan ini tinggal di dataran rendah",
             "Hewan ini untuk yang jantan memiliki rambut yang panjang",
         ],
-        soundURL: '/lion.mp3',
+        soundURL: '/sounds/lion.mp3',
     },
     {
         id: 2,
@@ -28,7 +28,7 @@ const imageUploader = [
             "Hewan ini adalah pemangsa puncak",
             "Hewan ini hidup di hutan tropis",
         ],
-        soundURL: '/tiger.mp3',
+        soundURL: '/sounds/tiger.mp3',
     },
     {
         id: 3,
@@ -37,7 +37,7 @@ const imageUploader = [
             "Hewan ini sangat cerdas",
             "Hewan ini tinggal di hutan tropis",
         ],
-        soundURL: '/monkey.mp3',
+        soundURL: '/sounds/monkey.mp3',
     },
 ];
 
@@ -113,7 +113,10 @@ const App = () => {
                 // Handle dropping the image on the correct card
                 setDroppedImages((prevState) => ({
                     ...prevState,
-                    [cardId]: item,
+                    [cardId]: {
+                        ...item,
+                        isCorrect: item.id === animal.id, // Check if the drop is correct
+                    },
                 }));
             },
             collect: (monitor) => ({
@@ -157,6 +160,15 @@ const App = () => {
                             />
                             <p className="mt-4 text-green-500">Jawaban kamu benar!</p>
                         </div>
+                    ) : droppedImages[cardId]?.id ? (
+                        <div className="text-center">
+                            <img
+                                src={droppedImages[cardId]?.src}
+                                alt={droppedImages[cardId]?.name}
+                                className="w-full h-full object-cover"
+                            />
+                            <p className="mt-4 text-red-500">Jawaban kamu salah!</p>
+                        </div>
                     ) : (
                         <p>Drag an animal here</p>
                     )}
@@ -176,7 +188,7 @@ const App = () => {
             <div
                 id="book-content"
                 className="flex flex-col items-center w-full mt-8"
-                style={{ paddingBottom: '180px' }} // Adjusted bottom padding for the floating section height
+                style={{ paddingBottom: '120px' }} // Adjusted bottom padding for the floating section height
             >
                 {imageUploader.map((animal) => (
                     <Card key={animal.id} animal={animal} cardId={animal.id} />
