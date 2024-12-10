@@ -10,14 +10,46 @@ const animalImages = [
     // Add more animal images as needed
 ];
 
+const imageUploader = [
+    {
+        id: 1,
+        name: "Lion",
+        facts: [
+            "Hewan ini sering disebut raja hutan",
+            "Hewan ini tinggal di dataran rendah",
+            "Hewan ini untuk yang jantan memiliki rambut yang panjang",
+        ],
+        soundURL: '/lion.mp3',
+    },
+    {
+        id: 2,
+        name: "Tiger",
+        facts: [
+            "Hewan ini adalah pemangsa puncak",
+            "Hewan ini hidup di hutan tropis",
+        ],
+        soundURL: '/tiger.mp3',
+    },
+    {
+        id: 3,
+        name: "Monkey",
+        facts: [
+            "Hewan ini sangat cerdas",
+            "Hewan ini tinggal di hutan tropis",
+        ],
+        soundURL: '/monkey.mp3',
+    },
+];
+
 const App = () => {
-    const [selectedAnimal, setSelectedAnimal] = useState(null);
+    const [droppedImages, setDroppedImages] = useState({});
     const listRef = useRef(null);
     const [isFirstVisible, setIsFirstVisible] = useState(true);
     const [isLastVisible, setIsLastVisible] = useState(false);
 
-    const handlePlaySound = () => {
-        alert(`Playing sound for ${selectedAnimal?.name || 'Unknown'}`);
+    const handlePlaySound = (soundURL) => {
+        const audio = new Audio(soundURL);
+        audio.play();
     };
 
     const slideList = (direction) => {
@@ -54,18 +86,10 @@ const App = () => {
         };
     }, []);
 
-    const [{ isOver }, drop] = useDrop(() => ({
-        accept: 'animal',
-        drop: (item) => setSelectedAnimal(item),
-        collect: (monitor) => ({
-            isOver: monitor.isOver(),
-        }),
-    }));
-
     const AnimalImage = ({ animal }) => {
         const [{ isDragging }, drag] = useDrag(() => ({
             type: 'animal',
-            item: animal,
+            item: { ...animal },
             collect: (monitor) => ({
                 isDragging: monitor.isDragging(),
             }),
@@ -82,6 +106,65 @@ const App = () => {
         );
     };
 
+    const Card = ({ animal, cardId }) => {
+        const [{ isOver }, drop] = useDrop(() => ({
+            accept: 'animal',
+            drop: (item) => {
+                // Handle dropping the image on the correct card
+                setDroppedImages((prevState) => ({
+                    ...prevState,
+                    [cardId]: item,
+                }));
+            },
+            collect: (monitor) => ({
+                isOver: monitor.isOver(),
+            }),
+        }));
+
+        return (
+            <div
+                ref={drop}
+                className={`w-full p-4 bg-white border-4 border-gray-300 flex flex-col items-center mb-4`}
+            >
+                {/* Facts */}
+                <div className="mb-4">
+                    <h3 className="font-semibold">Facts:</h3>
+                    <ul>
+                        {animal.facts.map((fact, index) => (
+                            <li key={index} className="mb-1">{fact}</li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Play Sound Button */}
+                <button
+                    onClick={() => handlePlaySound(animal.soundURL)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
+                >
+                    Play Sound
+                </button>
+
+                {/* Drop Area */}
+                <div
+                    className={`w-80 h-80 bg-white border-4 ${isOver ? 'border-green-500' : 'border-gray-300'} flex items-center justify-center`}
+                >
+                    {droppedImages[cardId]?.id === animal.id ? (
+                        <div className="text-center">
+                            <img
+                                src={droppedImages[cardId]?.src}
+                                alt={droppedImages[cardId]?.name}
+                                className="w-full h-full object-cover"
+                            />
+                            <p className="mt-4 text-green-500">Jawaban kamu benar!</p>
+                        </div>
+                    ) : (
+                        <p>Drag an animal here</p>
+                    )}
+                </div>
+            </div>
+        );
+    };
+
     return (
         <div className="flex flex-col items-center min-h-screen bg-blue-100">
             {/* Logo */}
@@ -90,29 +173,18 @@ const App = () => {
             </div>
 
             {/* Animal Placeholder */}
-            <div id="book-content" className="flex flex-col items-center w-full mt-8">
-                <div
-                    ref={drop}
-                    className={`w-80 h-80 bg-white border-4 ${isOver ? 'border-green-500' : 'border-gray-300'}
-                    flex items-center justify-center`}
-                >
-                    {selectedAnimal ? (
-                        <img src={selectedAnimal.src} alt={selectedAnimal.name} className="w-full h-full object-cover" />
-                    ) : (
-                        <p>Drag an animal here</p>
-                    )}
-                </div>
-
-                <button
-                    onClick={handlePlaySound}
-                    className="bg-blue-500 text-white py-2 px-4 rounded mt-4"
-                >
-                    Play Sound
-                </button>
+            <div
+                id="book-content"
+                className="flex flex-col items-center w-full mt-8"
+                style={{ paddingBottom: '180px' }} // Adjusted bottom padding for the floating section height
+            >
+                {imageUploader.map((animal) => (
+                    <Card key={animal.id} animal={animal} cardId={animal.id} />
+                ))}
             </div>
 
             {/* Animal List with Buttons */}
-            <div className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center">
+            <div className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center z-10">
                 <button
                     className={`py-2 px-4 rounded-full absolute left-4 text-white transition-colors ${
                         isFirstVisible ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
