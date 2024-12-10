@@ -1,9 +1,10 @@
-# React + Vite
+# Buku Dongeng
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This web based application is for learning purposes. I created this web app so that i can teach my son about animals and other things that has unique sound and pictures. Feel free to form to make your own version!
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# buku-dongeng
+## Features
+1. List of animals
+2. Facts of the animal
+3. Sound of the animal
+4. Drag and drop feature for the picture
+5. Result whether the picture is correct based on the facts and sound
