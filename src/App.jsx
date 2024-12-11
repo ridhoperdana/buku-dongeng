@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrag, useDrop, useDragLayer } from 'react-dnd';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const animalImages = [
     { id: 1, name: "Lion", src: "/lion.webp" },
@@ -166,6 +168,60 @@ const imageUploader = [
     },
 ];
 
+const AnimalImage = ({ animal }) => {
+    const [{ isDragging }, drag, preview] = useDrag(() => ({
+        type: 'animal',
+        item: { ...animal },
+        collect: (monitor) => ({
+            isDragging: monitor.isDragging(),
+        }),
+    }));
+
+    return (
+        <div ref={drag} className="p-2 shrink-0">
+            <img
+                src={animal.src}
+                alt={animal.name}
+                className={`w-32 h-32 object-cover cursor-pointer rounded-lg shadow-lg transition-transform duration-300 ${isDragging ? 'opacity-50 scale-95' : ''}`}
+            />
+        </div>
+    );
+};
+
+const CustomDragLayer = () => {
+    const { itemType, isDragging, item, currentOffset } = useDragLayer((monitor) => ({
+        itemType: monitor.getItemType(),
+        isDragging: monitor.isDragging(),
+        item: monitor.getItem(),
+        currentOffset: monitor.getSourceClientOffset(),
+    }));
+
+    if (!isDragging || !currentOffset) {
+        return null;
+    }
+
+    const { x, y } = currentOffset;
+
+    return (
+        <div
+            style={{
+                position: 'fixed',
+                pointerEvents: 'none',
+                left: 0,
+                top: 0,
+                transform: `translate(${x}px, ${y}px)`,
+                zIndex: 100,
+            }}
+        >
+            <img
+                src={item.src}
+                alt={item.name}
+                className="w-32 h-32 object-cover rounded-lg shadow-lg"
+            />
+        </div>
+    );
+};
+
 const App = () => {
     const [droppedImages, setDroppedImages] = useState({});
     const listRef = useRef(null);
@@ -220,26 +276,6 @@ const App = () => {
             list.removeEventListener('scroll', updateButtonState);
         };
     }, []);
-
-    const AnimalImage = ({ animal }) => {
-        const [{ isDragging }, drag] = useDrag(() => ({
-            type: 'animal',
-            item: { ...animal },
-            collect: (monitor) => ({
-                isDragging: monitor.isDragging(),
-            }),
-        }));
-
-        return (
-            <div ref={drag} className="p-2 shrink-0">
-                <img
-                    src={animal.src}
-                    alt={animal.name}
-                    className={`w-32 h-32 object-cover cursor-pointer rounded-lg shadow-lg transition-transform duration-300 ${isDragging ? 'opacity-50 scale-95' : ''}`}
-                />
-            </div>
-        );
-    };
 
     const Card = ({ animal, cardId }) => {
         const [{ isOver }, drop] = useDrop(() => ({
@@ -305,6 +341,8 @@ const App = () => {
 
     return (
         <div className={`flex flex-col items-center min-h-screen bg-blue-50`}>
+            <ToastContainer />
+            <CustomDragLayer />
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div className="bg-white p-8 rounded-xl text-center">
