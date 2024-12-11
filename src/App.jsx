@@ -5,8 +5,9 @@ const animalImages = [
     { id: 1, name: "Lion", src: "/lion.webp" },
     { id: 2, name: "Tiger", src: "/tiger.webp" },
     { id: 3, name: "Monkey", src: "/monkey.webp" },
-    { id: 4, name: "Tiger", src: "/tiger.webp" },
-    { id: 5, name: "Lion", src: "/lion.webp" },
+    { id: 4, name: "Parrot", src: "/parrot.webp" },
+    { id: 5, name: "Giraffe", src: "/giraffe.webp" },
+    { id: 6, name: "Elephant", src: "/elephant.webp" },
     // Add more animal images as needed
 ];
 
@@ -15,9 +16,26 @@ const imageUploader = [
         id: 1,
         name: "Lion",
         facts: [
-            "Hewan ini sering disebut raja hutan",
-            "Hewan ini tinggal di dataran rendah",
-            "Hewan ini untuk yang jantan memiliki rambut yang panjang",
+            "Raja Hutan. " +
+            "Tahukah kamu, singa sering disebut sebagai raja hutan? Mereka kuat, pemberani, dan suaranya menggelegar seperti raja sejati!",
+            "Hidup di Padang Rumput. " +
+            "Meskipun disebut raja hutan, singa sebenarnya lebih suka tinggal di padang rumput yang luas. Mereka bisa berlari dengan cepat untuk mengejar mangsa.",
+            "Rambut Panjang Singa Jantan. " +
+            "Singa jantan memiliki surai atau rambut panjang di lehernya. Itu seperti mahkota mereka yang menunjukkan kekuatan dan keberanian.",
+            "Hidup Berkelompok. " +
+            "Singa hidup dalam kelompok yang disebut kawanan. Dalam kawanan ini, mereka saling membantu untuk berburu dan menjaga satu sama lain.",
+            "Singa Betina yang Hebat. " +
+            "Tahukah kamu? Singa betina adalah pemburu utama dalam kawanan. Mereka sangat cerdas dan bekerja sama untuk menangkap mangsa.",
+            "Mendengarkan dari Jauh. " +
+            "Singa memiliki pendengaran yang sangat tajam. Mereka bisa mendengar suara mangsa dari jarak jauh.",
+            "Tidur yang Panjang. " +
+            "Singa suka tidur, bahkan hingga 20 jam sehari. Wah, mereka benar-benar raja yang santai, ya!",
+            "Suara Menggelegar. " +
+            "Auman singa bisa terdengar hingga 8 kilometer jauhnya. Itu cara mereka menunjukkan siapa penguasanya.",
+            "Punya Keluarga Besar. " +
+            "Singa sering menjaga keluarganya dengan baik, terutama anak-anaknya yang disebut anak singa atau cub.",
+            "Simbol Keberanian. " +
+            "Di banyak cerita, singa menjadi simbol keberanian dan kekuatan.",
         ],
         soundURL: '/lion.mp3',
     },
@@ -25,8 +43,26 @@ const imageUploader = [
         id: 2,
         name: "Tiger",
         facts: [
-            "Hewan ini adalah pemangsa puncak",
-            "Hewan ini hidup di hutan tropis",
+            "Pemangsa yang Hebat. " +
+            "Harimau adalah pemangsa puncak di hutan. Mereka berburu sendirian dan sangat ahli dalam mengendap-endap.",
+            "Berbulu Loreng. " +
+            "Bulu harimau yang loreng membantunya bersembunyi di antara pepohonan. Lorengnya unik, tidak ada harimau dengan pola yang sama!",
+            "Hidup di Hutan Tropis. " +
+            "Harimau tinggal di hutan tropis yang lebat. Mereka suka berenang di sungai untuk mendinginkan tubuh.",
+            "Kucing yang Jago Renang. " +
+            "Harimau adalah kucing besar yang sangat suka air. Mereka pandai berenang dan sering berburu di dekat air.",
+            "Taring Tajam. " +
+            "Taring harimau sangat kuat, digunakan untuk menangkap mangsa dengan cepat.",
+            "Suka Malam Hari. " +
+            "Harimau sering berburu di malam hari. Mata mereka bisa melihat dalam gelap dengan sangat baik.",
+            "Sangat Mandiri. " +
+            "Berbeda dengan singa, harimau hidup sendiri dan sangat menjaga wilayahnya.",
+            "Langkah yang Senyap. " +
+            "Saat berburu, harimau berjalan sangat pelan dan senyap. Mangsa bahkan tidak sadar sampai harimau sudah dekat.",
+            "Pernapasan yang Tenang. " +
+            "Harimau bisa menahan napasnya saat mendekati mangsa agar tidak ketahuan.",
+            "Simbol Keberanian di Asia. " +
+            "Harimau sering menjadi simbol keberanian di berbagai budaya Asia.",
         ],
         soundURL: '/tiger.mp3',
     },
@@ -34,10 +70,99 @@ const imageUploader = [
         id: 3,
         name: "Monkey",
         facts: [
-            "Hewan ini sangat cerdas",
-            "Hewan ini tinggal di hutan tropis",
+            "Hewan yang Cerdas. " +
+            "Monyet dikenal sangat cerdas. Mereka bisa menggunakan alat sederhana untuk mencari makanan.",
+            "Suka di Pohon. " +
+            "Monyet tinggal di pohon-pohon tinggi. Mereka melompat dari satu pohon ke pohon lain dengan lincah.",
+            "Makan Buah-Buahan. " +
+            "Monyet suka makan buah-buahan seperti pisang, tetapi mereka juga makan serangga dan daun.",
+            "Hidup Berkelompok. " +
+            "Monyet hidup dalam kelompok besar. Mereka saling membantu dan bermain bersama.",
+            "Bersuara Ramai. " +
+            "Kelompok monyet sering terdengar berisik karena mereka suka berbicara satu sama lain dengan suara yang unik.",
+            "Pandai Meniru. " +
+            "Monyet bisa meniru gerakan manusia. Itulah mengapa mereka sering terlihat lucu.",
+            "Ekornya Serbaguna. " +
+            "Banyak monyet memiliki ekor panjang yang digunakan untuk menjaga keseimbangan saat melompat.",
+            "Suka Bermain. " +
+            "Monyet suka bermain. Mereka sering terlihat bergelantungan di cabang pohon seperti sedang main ayunan.",
+            "Saling Membersihkan. " +
+            "Monyet sering membersihkan bulu temannya. Ini cara mereka menunjukkan kasih sayang.",
+            "Hewan yang Ramah. " +
+            "Monyet dikenal ramah dengan manusia, terutama jika manusia memberi mereka makanan!",
         ],
         soundURL: '/monkey.mp3',
+    },
+    {
+        id: 6,
+        name: "Elephant",
+        facts: [
+            "Gajah adalah Hewan Darat Terbesar. Tahukah kamu, gajah itu hewan darat terbesar di dunia? Beratnya bisa sampai 6.000 kilogram, lho! Itu berat sekali, kan?",
+            "Pintar dan Bijaksana. Gajah punya otak yang besar, dan mereka sangat pintar. Mereka bisa mengingat banyak hal, bahkan teman-temannya. Kalau bertemu lagi setelah bertahun-tahun, mereka masih ingat!",
+            "Hamil Lama Banget. Ibu gajah harus menunggu 22 bulan untuk melahirkan anaknya. Wah, itu hampir dua tahun, lebih lama dari manusia!",
+            "Gading Gajah. Lihat gajah yang punya gading panjang? Itu sebenarnya gigi mereka yang tumbuh ke luar! Gading itu dipakai untuk menggali tanah atau melindungi diri.",
+            "Bersuara Unik. Gajah bisa \"berbicara\" dengan suara keras seperti terompet. Tapi yang hebat, mereka juga bisa membuat suara pelan yang hanya bisa didengar gajah lain meski dari jauh.",
+            "Suka Bermain Air. Gajah suka mandi dan bermain air. Mereka juga jago berenang, lho! Kalau menyelam, belalai mereka digunakan sebagai snorkel.",
+            "Hidup Bersama Keluarga. Gajah suka hidup berkelompok bersama keluarganya. Kelompok ini dipimpin oleh ibu gajah yang paling tua dan bijaksana.",
+            "Makan Banyak. Gajah suka makan daun, rumput, dan buah-buahan. Mereka bisa makan sampai 150 kilogram sehari! Itu seperti makan 1.000 pisang setiap hari!",
+            "Sedih dan Bahagia. Gajah itu sangat emosional, lho. Mereka bisa merasa bahagia, sedih, bahkan menangis kalau ada temannya yang pergi selamanya.",
+            "Kuping yang Hebat. Telinga gajah itu besar sekali, seperti kipas angin. Ternyata, telinga itu membantu mereka merasa sejuk saat cuaca panas."
+        ],
+        soundURL: '/elephant.mp3',
+    },
+    {
+        id: 4,
+        name: "Parrot",
+        facts: [
+            "Burung yang Warna-Warni. " +
+            "Burung beo memiliki bulu yang indah dan warna-warni. Mereka terlihat sangat cantik!",
+            "Bisa Meniru Suara. " +
+            "Burung beo bisa meniru suara manusia. Mereka belajar dengan cepat dan suka bermain.",
+            "Makan Buah dan Biji. " +
+            "Burung beo suka makan buah, biji-bijian, dan kacang. Mereka juga membantu menyebarkan biji tanaman.",
+            "Tinggal di Pohon. " +
+            "Burung beo tinggal di pohon-pohon tinggi di hutan tropis.",
+            "Paruh yang Kuat. " +
+            "Paruh burung beo sangat kuat, digunakan untuk memecahkan biji yang keras.",
+            "Suka Berpasangan. " +
+            "Burung beo sering terlihat berpasangan, mereka setia dengan pasangannya seumur hidup.",
+            "Berusia Panjang. " +
+            "Burung beo bisa hidup hingga 50 tahun atau lebih!",
+            "Cerdas dan Aktif. " +
+            "Burung beo sangat pintar dan suka bermain. Mereka juga cepat belajar trik.",
+            "Bersuara Nyaring. " +
+            "Burung beo memiliki suara yang keras, mereka suka memanggil temannya dengan berteriak.",
+            "Hewan yang Ramah. " +
+            "Burung beo dikenal ramah dengan manusia, apalagi jika diberi makanan yang mereka suka."
+        ],
+        soundURL: '/elephant.mp3',
+    },
+    {
+        id: 5,
+        name: "Giraffe",
+        facts: [
+            "Leher yang Panjang. " +
+            "Jerapah punya leher yang panjang sekali! Leher itu membantunya memakan daun dari pohon yang tinggi.",
+            "Hidup di Savana. " +
+            "Jerapah tinggal di savana yang luas. Mereka suka berjalan-jalan mencari makanan.",
+            "Bintik-Bintik Unik. " +
+            "Kulit jerapah punya pola bintik-bintik yang unik. Tidak ada dua jerapah yang sama!",
+            "Lidah Panjang. " +
+            "Lidah jerapah panjang dan kuat, hingga 50 cm. Lidah ini membantunya memetik daun.",
+            "Berjalan dengan Elegan. " +
+            "Meskipun tinggi, jerapah berjalan dengan sangat anggun.",
+            "Minum dengan Posisi Unik. " +
+            "Saat minum, jerapah harus membungkuk dengan cara yang lucu karena lehernya terlalu panjang.",
+            "Tidur Sebentar Saja. " +
+            "Jerapah hanya butuh tidur beberapa jam sehari. Mereka sering tidur sambil berdiri.",
+            "Pendengar yang Hebat. " +
+            "Telinga jerapah sangat tajam, mereka bisa mendengar suara dari jauh.",
+            "Berkomunikasi dengan Suara Rendah. " +
+            "Jerapah berbicara dengan suara yang sangat rendah, bahkan manusia tidak bisa mendengarnya.",
+            "Ramah dengan Temannya. " +
+            "Jerapah suka hidup berkelompok, dan mereka saling menjaga satu sama lain."
+        ],
+        soundURL: '/elephant.mp3',
     },
 ];
 
@@ -143,10 +268,10 @@ const App = () => {
             >
                 {/* Facts */}
                 <div className="mb-4">
-                    <h3 className="font-semibold">Facts:</h3>
+                    <h3 className="font-semibold">Fakta:</h3>
                     <ul>
                         {animal.facts.map((fact, index) => (
-                            <li key={index} className="mb-1">{fact}</li>
+                            <li key={index} className="mb-6">{fact}</li>
                         ))}
                     </ul>
                 </div>
@@ -156,7 +281,7 @@ const App = () => {
                     onClick={() => handlePlaySound(animal.soundURL)}
                     className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
                 >
-                    Play Sound
+                    Putar suara hewan
                 </button>
 
                 {/* Drop Area */}
@@ -182,7 +307,7 @@ const App = () => {
                             <p className="mt-4 text-red-500">Jawaban kamu salah!</p>
                         </div>
                     ) : (
-                        <p>Drag an animal here</p>
+                        <p>Geser foto hewan kesini</p>
                     )}
                 </div>
             </div>
