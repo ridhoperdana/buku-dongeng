@@ -118,6 +118,11 @@ const imageUploader = [
     },
 ];
 
+const getRandomizedImageUploader = () => {
+    const shuffled = [...imageUploader].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, 2);
+};
+
 const AnimalImage = ({ animal, isDropAreaVisible }) => {
     const [{ isDragging }, drag, preview] = useDrag(() => ({
         type: 'animal',
@@ -175,6 +180,7 @@ const CustomDragLayer = () => {
 
 const App = () => {
     const [droppedImages, setDroppedImages] = useState({});
+    const [randomizedImageUploader, setRandomizedImageUploader] = useState(getRandomizedImageUploader());
     const listRef = useRef(null);
     const [isFirstVisible, setIsFirstVisible] = useState(true);
     const [isLastVisible, setIsLastVisible] = useState(false);
@@ -339,7 +345,11 @@ const App = () => {
     };
 
     return (
-        <div className={`flex flex-col items-center min-h-screen bg-blue-50`}>
+        <div style={{
+            backgroundImage: 'url("/background.jpg")',
+            backgroundRepeat: 'repeat',
+            backgroundSize: 'auto',
+        }} className={`flex flex-col items-center min-h-screen bg-blue-50`}>
             <ToastContainer />
             <CustomDragLayer />
             {showModal && (
@@ -367,7 +377,7 @@ const App = () => {
                 className="flex flex-col items-center w-full mt-8"
                 style={{ paddingBottom: '160px' }} // Adjusted bottom padding for the floating section height
             >
-                {imageUploader.map((animal) => (
+                {randomizedImageUploader.map((animal) => (
                     <Card key={animal.id} animal={animal} cardId={animal.id} />
                 ))}
                 {/* Footer Section */}
