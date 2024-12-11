@@ -135,7 +135,7 @@ const imageUploader = [
             "Hewan yang Ramah. " +
             "Burung beo dikenal ramah dengan manusia, apalagi jika diberi makanan yang mereka suka."
         ],
-        soundURL: '/elephant.mp3',
+        soundURL: '/parrot.mp3',
     },
     {
         id: 5,
@@ -178,12 +178,11 @@ const App = () => {
         audio.play();
     };
 
-    // Detect if the user is on desktop (large screen) or mobile
     const checkDevice = () => {
         if (window.innerWidth > 768) {
-            setShowModal(true); // Show modal if on desktop
+            setShowModal(true);
         } else {
-            setShowModal(false); // Hide modal if on mobile
+            setShowModal(false);
         }
     };
 
@@ -191,7 +190,7 @@ const App = () => {
         const list = listRef.current;
         if (!list) return;
 
-        const scrollAmount = 200; // Number of pixels to scroll
+        const scrollAmount = 200;
         list.scrollBy({
             left: direction === 'left' ? -scrollAmount : scrollAmount,
             behavior: 'smooth',
@@ -209,12 +208,11 @@ const App = () => {
     };
 
     useEffect(() => {
-        checkDevice(); // Check on initial load
+        checkDevice();
 
         const list = listRef.current;
         if (!list) return;
 
-        // Update button states on scroll
         list.addEventListener('scroll', updateButtonState);
         updateButtonState();
 
@@ -237,7 +235,7 @@ const App = () => {
                 <img
                     src={animal.src}
                     alt={animal.name}
-                    className={`w-32 h-32 object-cover cursor-pointer ${isDragging ? 'opacity-50' : ''}`}
+                    className={`w-32 h-32 object-cover cursor-pointer rounded-lg shadow-lg transition-transform duration-300 ${isDragging ? 'opacity-50 scale-95' : ''}`}
                 />
             </div>
         );
@@ -247,12 +245,11 @@ const App = () => {
         const [{ isOver }, drop] = useDrop(() => ({
             accept: 'animal',
             drop: (item) => {
-                // Handle dropping the image on the correct card
                 setDroppedImages((prevState) => ({
                     ...prevState,
                     [cardId]: {
                         ...item,
-                        isCorrect: item.id === animal.id, // Check if the drop is correct
+                        isCorrect: item.id === animal.id,
                     },
                 }));
             },
@@ -264,76 +261,67 @@ const App = () => {
         return (
             <div
                 ref={drop}
-                className={`w-full p-4 bg-white border-4 border-gray-300 flex flex-col items-center mb-4`}
+                className={`w-5/6 max-w-lg p-8 bg-white border-4 flex flex-col items-center mb-4 rounded-xl shadow-lg ${isOver ? 'border-green-300' : 'border-white-200'}`}
             >
-                {/* Facts */}
                 <div className="mb-4">
-                    <h3 className="font-semibold">Fakta:</h3>
+                    <h3 className="font-semibold text-blue-600">Fakta:</h3>
                     <ul>
                         {animal.facts.map((fact, index) => (
-                            <li key={index} className="mb-6">{fact}</li>
+                            <li key={index} className="mb-2 text-gray-700">{fact}</li>
                         ))}
                     </ul>
                 </div>
 
-                {/* Play Sound Button */}
                 <button
                     onClick={() => handlePlaySound(animal.soundURL)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
+                    className="bg-blue-500 text-white py-2 px-4 rounded-xl shadow-md hover:bg-blue-400"
                 >
                     Putar suara hewan
                 </button>
 
-                {/* Drop Area */}
                 <div
-                    className={`w-80 h-80 bg-white border-4 ${isOver ? 'border-green-500' : 'border-gray-300'} flex items-center justify-center`}
+                    className={`w-80 h-80 bg-gray-100 flex items-center justify-center mt-4 ${isOver ? 'border-green-400' : 'border-blue-300'}`}
                 >
-                    {droppedImages[cardId]?.id === animal.id ? (
+                    {droppedImages[cardId]?.id === animal.id || droppedImages[cardId]?.id ? (
                         <div className="text-center">
                             <img
                                 src={droppedImages[cardId]?.src}
                                 alt={droppedImages[cardId]?.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full"
                             />
-                            <p className="mt-4 text-green-500">Jawaban kamu benar!</p>
-                        </div>
-                    ) : droppedImages[cardId]?.id ? (
-                        <div className="text-center">
-                            <img
-                                src={droppedImages[cardId]?.src}
-                                alt={droppedImages[cardId]?.name}
-                                className="w-full h-full object-cover"
-                            />
-                            <p className="mt-4 text-red-500">Jawaban kamu salah!</p>
                         </div>
                     ) : (
-                        <p>Geser foto hewan kesini</p>
+                        <p className="text-gray-500">Geser foto hewan kesini</p>
                     )}
                 </div>
+                {droppedImages[cardId]?.id === animal.id ? (
+                    <p className="mt-4 text-green-500">Jawaban kamu benar!</p>
+                ) : droppedImages[cardId]?.id ? (
+                    <p className="mt-4 text-red-500">Jawaban kamu salah!</p>
+                ) : <p></p>}
             </div>
         );
     };
 
     return (
-        <div className={`flex flex-col items-center min-h-screen bg-blue-100 ${showModal ? 'blurred' : ''}`}>
-            {/* Modal for Desktop Access */}
+        <div className={`flex flex-col items-center min-h-screen bg-blue-50`}>
             {showModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div className="bg-white p-8 rounded-lg text-center">
-                        <h2 className="text-xl font-semibold">Please access this web app on a mobile device!</h2>
-                        <p className="mt-4 text-gray-600">This app is optimized for mobile use.</p>
+                    <div className="bg-white p-8 rounded-xl text-center">
+                        <h2 className="text-xl font-semibold text-blue-600">Akses aplikasi ini di perangkat seluler!</h2>
+                        <p className="mt-4 text-gray-600">Aplikasi ini dioptimalkan untuk penggunaan di ponsel.</p>
                         <button
                             onClick={() => setShowModal(false)}
-                            className="bg-blue-500 text-white py-2 px-6 rounded mt-4"
+                            className="bg-blue-500 text-white py-2 px-6 rounded mt-4 hover:bg-blue-400"
                         >
-                            Close
+                            Tutup
                         </button>
                     </div>
                 </div>
             )}
-            {/* Logo */}
-            <div className="w-full p-4 bg-gray-800 text-white text-center">
-                <h1 className="text-xl">BukuDongeng</h1>
+
+            <div className="w-full p-4 bg-gray-800 text-white text-center shadow-lg">
+                <h1 className="text-xl font-bold">BukuDongeng</h1>
             </div>
 
             {/* Animal Placeholder */}
@@ -348,15 +336,14 @@ const App = () => {
                 {/* Footer Section */}
                 <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8">
                     <p>
-                        All audio is retrieved from <a href="https://pixabay.com" className="underline">Pixabay</a> and animal pictures are generated by ChatGPT.
+                        Semua audio diambil dari <a href="https://pixabay.com" className="underline">Pixabay</a> dan gambar hewan dihasilkan oleh AI.
                     </p>
                 </footer>
             </div>
 
-            {/* Animal List with Buttons */}
-            <div className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center z-10">
+            <div className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center z-10 rounded-t-xl">
                 <button
-                    className={`py-2 px-4 rounded-full absolute left-4 text-white transition-colors ${
+                    className={`py-2 px-4 rounded-full absolute left-4 text-white shadow-md transition-colors ${
                         isFirstVisible ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
                     }`}
                     onClick={() => !isFirstVisible && slideList('left')}
@@ -372,7 +359,7 @@ const App = () => {
                 </div>
 
                 <button
-                    className={`py-2 px-4 rounded-full absolute right-4 text-white transition-colors ${
+                    className={`py-2 px-4 rounded-full absolute right-4 text-white shadow-md transition-colors ${
                         isLastVisible ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
                     }`}
                     onClick={() => !isLastVisible && slideList('right')}
@@ -384,5 +371,6 @@ const App = () => {
         </div>
     );
 };
+
 
 export default App;
