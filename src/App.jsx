@@ -381,10 +381,11 @@ const App = () => {
                     <Card key={animal.id} animal={animal} cardId={animal.id} />
                 ))}
                 {/* Footer Section */}
-                <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8">
+                <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8 p-4">
                     <p>
                         Semua audio diambil dari <a href="https://pixabay.com" className="underline">Pixabay</a> dan gambar hewan dihasilkan oleh AI.
                     </p>
+                    <p>Web dibuat oleh <a href="https://ridho.work" className="underline">Ridho Perdana</a></p>
                 </footer>
             </div>
 
