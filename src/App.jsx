@@ -85,11 +85,6 @@ const App = () => {
 
     useEffect(() => {
         checkDevice(); // Check on initial load
-        window.addEventListener('resize', checkDevice); // Listen for window resize
-
-        return () => {
-            window.removeEventListener('resize', checkDevice);
-        };
 
         const list = listRef.current;
         if (!list) return;
