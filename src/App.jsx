@@ -188,6 +188,7 @@ const App = () => {
     const [isAnimalListVisible, setIsAnimalListVisible] = useState(false);
     const observerRef = useRef(null);
     const dropAreaRefs = useRef(new Map());
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handlePlaySound = (soundURL) => {
         const audio = new Audio(soundURL);
@@ -367,9 +368,34 @@ const App = () => {
                 </div>
             )}
 
-            <div className="w-full p-4 bg-gray-800 text-white text-center shadow-lg">
+            <div className="w-full p-4 bg-gray-800 text-white shadow-lg flex justify-between items-center">
                 <h1 className="text-xl font-bold">BukuDongeng</h1>
+                <button
+                    className="text-white focus:outline-none"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    ☰
+                </button>
             </div>
+
+            {isMenuOpen && (
+                <div className="fixed inset-y-0 right-0 w-64 bg-white shadow-lg z-50 p-4 transition-transform transform translate-x-0">
+                    <button
+                        className="text-gray-800 focus:outline-none"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        ✕
+                    </button>
+                    <div className="mt-4">
+                        <a
+                            href="mailto:personal@ridho.work"
+                            className="w-full block text-grey-400 py-2 px-4 shadow-md"
+                        >
+                            Request Features
+                        </a>
+                    </div>
+                </div>
+            )}
 
             {/* Animal Placeholder */}
             <div
@@ -382,10 +408,10 @@ const App = () => {
                 ))}
                 {/* Footer Section */}
                 <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8 p-4">
-                    <p>
+                    <p className='text-sm'>
                         Semua audio diambil dari <a href="https://pixabay.com" className="underline">Pixabay</a> dan gambar hewan dihasilkan oleh AI.
                     </p>
-                    <p>Web dibuat oleh <a href="https://ridho.work" className="underline">Ridho Perdana</a></p>
+                    <p className='text-sm'>Web dibuat oleh <a href="https://ridho.work" className="underline">Ridho Perdana</a></p>
                 </footer>
             </div>
 
