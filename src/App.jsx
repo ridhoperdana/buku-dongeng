@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useDrag, useDrop, useDragLayer } from 'react-dnd';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -118,14 +118,15 @@ const imageUploader = [
     },
 ];
 
-const AnimalImage = ({ animal }) => {
+const AnimalImage = ({ animal, isDropAreaVisible }) => {
     const [{ isDragging }, drag, preview] = useDrag(() => ({
         type: 'animal',
         item: { ...animal },
+        canDrag: isDropAreaVisible,
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),
-    }));
+    }), [isDropAreaVisible]);
 
     return (
         <div ref={drag} className="p-2 shrink-0">
@@ -178,10 +179,15 @@ const App = () => {
     const [isFirstVisible, setIsFirstVisible] = useState(true);
     const [isLastVisible, setIsLastVisible] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isAnimalListVisible, setIsAnimalListVisible] = useState(false);
+    const observerRef = useRef(null);
+    const dropAreaRefs = useRef(new Map());
 
     const handlePlaySound = (soundURL) => {
         const audio = new Audio(soundURL);
-        audio.play();
+        audio.play().catch(error => {
+            toast.error('Error playing the audio stream. Please try again later.');
+        });
     };
 
     const checkDevice = () => {
@@ -227,6 +233,42 @@ const App = () => {
         };
     }, []);
 
+    useEffect(() => {
+        
+        // Disconnect any existing observer
+        if (observerRef.current) {
+            observerRef.current.disconnect();
+        }
+
+        // Create a new IntersectionObserver
+        observerRef.current = new IntersectionObserver(
+            (entries) => {
+                const firstVisibleEntry = entries.find(entry => entry.intersectionRatio > 0.8);
+                if (firstVisibleEntry) {
+                    setIsAnimalListVisible(true);
+                } else {
+                    setIsAnimalListVisible(false);
+                }
+            },
+            {
+                root: null, // Use the viewport as the root
+                threshold: [0, 0.8], // Check at 0%, 50%, and 100% visibility
+            }
+        );
+
+        dropAreaRefs.current.forEach((ref) => {
+            if (ref) {
+                observerRef.current.observe(ref);
+            }
+        });
+
+        return () => {
+            if (observerRef.current) {
+                observerRef.current.disconnect();
+            }
+        };
+    }, [dropAreaRefs.current, isAnimalListVisible]); // Re-initialize when dropAreaRefs change
+
     const Card = ({ animal, cardId }) => {
         const [{ isOver }, drop] = useDrop(() => ({
             accept: 'animal',
@@ -243,6 +285,12 @@ const App = () => {
                 isOver: monitor.isOver(),
             }),
         }));
+
+        const setDropAreaRef = useCallback((node) => {
+            if (node !== null) {
+                dropAreaRefs.current.set(cardId, node);
+            }
+        }, [cardId]);
 
         return (
             <div
@@ -266,10 +314,11 @@ const App = () => {
                 </button>
 
                 <div
+                    ref={setDropAreaRef}
                     className={`w-80 h-80 bg-gray-100 flex items-center justify-center mt-4 ${isOver ? 'border-green-400' : 'border-blue-300'}`}
                 >
                     {droppedImages[cardId]?.id === animal.id || droppedImages[cardId]?.id ? (
-                        <div className="text-center">
+                        <div id="animal-drop-area" className="text-center">
                             <img
                                 src={droppedImages[cardId]?.src}
                                 alt={droppedImages[cardId]?.name}
@@ -329,7 +378,10 @@ const App = () => {
                 </footer>
             </div>
 
-            <div className="fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center z-10 rounded-t-xl">
+            <div
+                id="animal-choosen-list"
+                className={`fixed bottom-0 left-0 right-0 bg-gray-800 shadow p-4 flex items-center z-10 rounded-t-xl transition-opacity duration-500 ${isAnimalListVisible ? 'opacity-100' : 'opacity-0'}`}
+            >
                 <button
                     className={`py-2 px-4 rounded-full absolute left-4 text-white shadow-md transition-colors ${
                         isFirstVisible ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
@@ -342,7 +394,7 @@ const App = () => {
 
                 <div ref={listRef} className="flex gap-4 overflow-x-hidden w-full px-12">
                     {animalImages.map((animal) => (
-                        <AnimalImage key={animal.id} animal={animal} />
+                        <AnimalImage key={animal.id} animal={animal} isDropAreaVisible={isAnimalListVisible} />
                     ))}
                 </div>
 
@@ -359,6 +411,5 @@ const App = () => {
         </div>
     );
 };
-
 
 export default App;
