@@ -232,6 +232,32 @@ const CustomDragLayer = () => {
     );
 };
 
+const AnimalList = ({ listRef, correctAnimals, isAnimalListVisible }) => {
+    const correctAnimalIds = correctAnimals.map(animal => animal.id);
+    
+    const incorrectAnimals = animalImages.filter(animal => !correctAnimalIds.includes(animal.id));
+    const correctAnimalsData = animalImages.filter(animal => correctAnimalIds.includes(animal.id));
+    
+    // For each correct animal, get 2 random incorrect ones
+    const getRandomAnimalsForCard = (correctAnimal) => {
+        const shuffledIncorrect = [...incorrectAnimals]
+            .filter(animal => animal.id !== correctAnimal.id)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 2);
+
+        return shuffledIncorrect.concat(correctAnimalsData);
+    };
+
+    return (
+        <div ref={listRef} className="flex gap-4 overflow-x-hidden w-full px-12">
+            {getRandomAnimalsForCard(correctAnimalsData).map((animal) => (
+                <AnimalImage key={animal.id} animal={animal} isDropAreaVisible={isAnimalListVisible} />
+            ))}
+        </div>
+        // <div></div>
+    );
+};
+
 const App = () => {
     const [droppedImages, setDroppedImages] = useState({});
     const [randomizedImageUploader, setRandomizedImageUploader] = useState(getRandomizedImageUploader());
@@ -483,11 +509,7 @@ const App = () => {
                     ◀
                 </button>
 
-                <div ref={listRef} className="flex gap-4 overflow-x-hidden w-full px-12">
-                    {animalImages.map((animal) => (
-                        <AnimalImage key={animal.id} animal={animal} isDropAreaVisible={isAnimalListVisible} />
-                    ))}
-                </div>
+                <AnimalList listRef={listRef} correctAnimals={randomizedImageUploader} isDropAreaVisible={isAnimalListVisible} />
 
                 <button
                     className={`py-2 px-4 rounded-full absolute right-4 text-white shadow-md transition-colors ${
