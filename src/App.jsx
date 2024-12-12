@@ -254,7 +254,6 @@ const AnimalList = ({ listRef, correctAnimals, isAnimalListVisible }) => {
                 <AnimalImage key={animal.id} animal={animal} isDropAreaVisible={isAnimalListVisible} />
             ))}
         </div>
-        // <div></div>
     );
 };
 
@@ -509,7 +508,7 @@ const App = () => {
                     ◀
                 </button>
 
-                <AnimalList listRef={listRef} correctAnimals={randomizedImageUploader} isDropAreaVisible={isAnimalListVisible} />
+                <AnimalList listRef={listRef} correctAnimals={randomizedImageUploader} isAnimalListVisible={isAnimalListVisible} />
 
                 <button
                     className={`py-2 px-4 rounded-full absolute right-4 text-white shadow-md transition-colors ${
