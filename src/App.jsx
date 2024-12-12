@@ -10,6 +10,9 @@ const animalImages = [
     { id: 4, name: "Parrot", src: "/parrot.webp" },
     { id: 5, name: "Giraffe", src: "/giraffe.webp" },
     { id: 6, name: "Elephant", src: "/elephant.webp" },
+    { id: 7, name: "Cat", src: "/cat.jpeg" },
+    { id: 8, name: "Dog", src: "/dog.jpeg" },
+    { id: 9, name: "Duck", src: "/duck.jpeg" },
     // Add more animal images as needed
 ];
 
@@ -116,6 +119,57 @@ const imageUploader = [
         ],
         soundURL: '/elephant.mp3',
     },
+    {
+        id: 7,
+        name: "Cat",
+        facts: [
+            "Kucing punya kumis yang sangat sensitif, membantu mereka merasakan lingkungan sekitar.",
+            "Kucing bisa melompat hingga 6 kali panjang tubuhnya! Mereka atlet yang hebat.",
+            "Saat kucing mendengkur, itu bisa membantu menyembuhkan tulang dan otot mereka.",
+            "Kucing punya penglihatan malam yang sangat bagus, 6 kali lebih baik dari manusia.",
+            "Kucing menggunakan ekornya untuk menjaga keseimbangan saat berjalan dan berlari.",
+            "Kucing suka tidur hingga 16 jam sehari. Mereka benar-benar suka santai!",
+            "Kucing berkomunikasi dengan manusia menggunakan suara 'meong' khusus.",
+            "Kucing sangat bersih, mereka menghabiskan 30% waktu mereka untuk membersihkan diri.",
+            "Hidung kucing unik seperti sidik jari manusia, tidak ada yang sama.",
+            "Kucing bisa berlari dengan kecepatan hingga 30 kilometer per jam.",
+        ],
+        soundURL: '/cat.mp3',
+    },
+    {
+        id: 8,
+        name: "Dog",
+        facts: [
+            "Anjing bisa memahami lebih dari 150 kata yang diajarkan oleh manusia.",
+            "Hidung anjing sangat sensitif, 40 kali lebih kuat dari hidung manusia.",
+            "Anjing menggunakan ekornya untuk berkomunikasi dengan anjing lain dan manusia.",
+            "Anjing adalah hewan pertama yang dikirim ke luar angkasa dalam sebuah pesawat ruang angkasa!",
+            "Telinga anjing bisa menangkap suara dari jarak yang sangat jauh.",
+            "Anjing suka bermain dan belajar hal-hal baru sepanjang hidupnya.",
+            "Anjing sangat setia dan akan melindungi keluarganya.",
+            "Anjing bisa mencium perasaan manusia dari bau tubuh kita.",
+            "Setiap anjing punya sidik jari hidung yang unik, seperti sidik jari manusia.",
+            "Anjing adalah sahabat terbaik manusia sejak ribuan tahun yang lalu.",
+        ],
+        soundURL: '/dog.mp3',
+    },
+    {
+        id: 9,
+        name: "Duck",
+        facts: [
+            "Bebek punya selaput di kakinya yang membantu mereka berenang dengan cepat.",
+            "Bulu bebek dilapisi minyak alami yang membuat mereka tetap kering saat berenang.",
+            "Bebek bisa tidur dengan setengah otak mereka, sementara setengah lainnya tetap terjaga.",
+            "Bebek kecil atau anak bebek bisa berenang sejak hari pertama menetas.",
+            "Suara 'kwek' bebek tidak menimbulkan gema, dan ilmuwan masih mempelajari mengapa.",
+            "Bebek sangat suka makan rumput dan tanaman air.",
+            "Bebek punya penglihatan yang sangat bagus dan bisa melihat warna.",
+            "Bebek sering terbang dalam formasi V untuk menghemat energi.",
+            "Bebek bisa menyelam hingga kedalaman 6 meter untuk mencari makanan.",
+            "Bebek adalah hewan yang sangat sosial dan suka hidup berkelompok.",
+        ],
+        soundURL: '/duck.mp3',
+    }
 ];
 
 const getRandomizedImageUploader = () => {
