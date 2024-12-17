@@ -4,15 +4,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const animalImages = [
-    { id: 1, name: "Lion", src: "/lion.webp" },
-    { id: 2, name: "Tiger", src: "/tiger.webp" },
-    { id: 3, name: "Monkey", src: "/monkey.webp" },
-    { id: 4, name: "Parrot", src: "/parrot.webp" },
-    { id: 5, name: "Giraffe", src: "/giraffe.webp" },
-    { id: 6, name: "Elephant", src: "/elephant.webp" },
-    { id: 7, name: "Cat", src: "/cat.jpeg" },
-    { id: 8, name: "Dog", src: "/dog.jpeg" },
-    { id: 9, name: "Duck", src: "/duck.jpeg" },
+    { id: 1, name: "Lion", src: "/lion.webp", alt: "Singa" },
+    { id: 2, name: "Tiger", src: "/tiger.webp", alt: "Harimau" },
+    { id: 3, name: "Monkey", src: "/monkey.webp", alt: "Monyet" },
+    { id: 4, name: "Parrot", src: "/parrot.webp", alt: "Beo" },
+    { id: 5, name: "Giraffe", src: "/giraffe.webp", alt: "Jerapah" },
+    { id: 6, name: "Elephant", src: "/elephant.webp", alt: "Gajah" },
+    { id: 7, name: "Cat", src: "/cat.jpeg", alt: "Kucing" },
+    { id: 8, name: "Dog", src: "/dog.jpeg", alt: "Anjing" },
+    { id: 9, name: "Duck", src: "/duck.jpeg", alt: "Bebek" },
     // Add more animal images as needed
 ];
 
@@ -191,7 +191,7 @@ const AnimalImage = ({ animal, isDropAreaVisible }) => {
         <div ref={drag} className="p-2 shrink-0">
             <img
                 src={animal.src}
-                alt={animal.name}
+                alt={animal.alt}
                 className={`w-32 h-32 object-cover cursor-pointer rounded-lg shadow-lg transition-transform duration-300 ${isDragging ? 'opacity-50 scale-95' : ''}`}
             />
         </div>
