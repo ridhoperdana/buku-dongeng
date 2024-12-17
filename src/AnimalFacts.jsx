@@ -445,12 +445,19 @@ const AnimalFacts = ({ IsMenuOpen }) => {
             {/* Animal Placeholder */}
             <div
                 id="book-content"
-                className="flex flex-col items-center w-full mb-8"
+                className="flex flex-col items-center w-full"
                 style={{ paddingBottom: '160px' }} // Adjusted bottom padding for the floating section height
             >
                 {randomizedImageUploader.map((animal) => (
                     <Card key={animal.id} animal={animal} cardId={animal.id} />
                 ))}
+                {/* Footer Section */}
+                <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8 p-4">
+                    <p className='text-sm'>
+                        Semua audio diambil dari <a href="https://pixabay.com" className="underline">Pixabay</a> dan gambar hewan dihasilkan oleh AI.
+                    </p>
+                    <p className='text-sm'>Web dibuat oleh <a href="https://ridho.work" className="underline">Ridho Perdana</a></p>
+                </footer>
             </div>
 
             <div

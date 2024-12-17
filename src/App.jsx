@@ -51,13 +51,6 @@ const App = () => {
                     <Route path="/" element={<AnimalFacts isMenuOpen={isMenuOpen} IsMenuOpen={isMenuOpen} />} />
                     <Route path="/story" element={<AnimalStory />} />
                 </Routes>
-                {/* Footer Section */}
-                <footer className="w-full bg-gray-800 text-white text-center py-4 mt-8 p-4">
-                    <p className='text-sm'>
-                        Semua audio diambil dari <a href="https://pixabay.com" className="underline">Pixabay</a> dan gambar hewan dihasilkan oleh AI.
-                    </p>
-                    <p className='text-sm'>Web dibuat oleh <a href="https://ridho.work" className="underline">Ridho Perdana</a></p>
-                </footer>
             </div>
     );
 };
