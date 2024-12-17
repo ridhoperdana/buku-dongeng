@@ -17,3 +17,4 @@ jobs:
           preCommands: npm run build
           command: pages deploy dist
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
