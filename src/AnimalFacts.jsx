@@ -388,7 +388,6 @@ const AnimalFacts = ({ IsMenuOpen }) => {
                 className={`w-5/6 max-w-lg p-8 bg-white border-4 flex flex-col items-center mb-4 rounded-xl shadow-lg ${isOver ? 'border-green-300' : 'border-white-200'}`}
             >
                 <div className="mb-4">
-                    <h3 className="font-semibold text-blue-600">Fakta:</h3>
                     <ul>
                         {animal.facts.map((fact, index) => (
                             <li key={index} className="mb-2 text-gray-700">{fact}</li>
@@ -434,13 +433,19 @@ const AnimalFacts = ({ IsMenuOpen }) => {
             backgroundRepeat: 'repeat',
             backgroundSize: 'auto',
         }} className={`flex flex-col items-center min-h-screen bg-blue-50`}>
+            <div className='p-8 place-self-start'>
+                <h2 className="text-2xl font-bold mb-4">Fakta Hewan</h2>
+                <p className="text-gray-700">
+                    Ayo temukan gambar hewan sesuai faktanya!
+                </p>
+            </div>
             <ToastContainer />
             <CustomDragLayer />
 
             {/* Animal Placeholder */}
             <div
                 id="book-content"
-                className="flex flex-col items-center w-full mt-8"
+                className="flex flex-col items-center w-full mb-8"
                 style={{ paddingBottom: '160px' }} // Adjusted bottom padding for the floating section height
             >
                 {randomizedImageUploader.map((animal) => (

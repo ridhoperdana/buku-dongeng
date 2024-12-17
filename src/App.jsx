@@ -36,12 +36,12 @@ const App = () => {
                             <Link to="/" className={`block py-2 px-4 ${
                         location.pathname === "/" ? "bg-gray-800 text-white" : "text-gray-400"
                         }`}>
-                                Animal Facts
+                                Fakta Hewan
                             </Link>
                             <Link to="/story" className={`block py-2 px-4 ${
                         location.pathname === "/story" ? "bg-gray-800 text-white" : "text-gray-400"
                         }`}>
-                                Animal Story
+                                Cerita Hewan
                             </Link>
                         </div>
                     </div>

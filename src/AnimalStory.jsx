@@ -8,9 +8,9 @@ const AnimalStory = () => {
             backgroundRepeat: 'repeat',
             backgroundSize: 'auto',
         }} className="p-8">
-            <h2 className="text-2xl font-bold mb-4">Animal Story</h2>
+            <h2 className="text-2xl font-bold mb-4">Cerita Hewan</h2>
             <p className="text-gray-700">
-                Here you can add your animal stories. This is a placeholder for the animal story content.
+                Yuk baca cerita hewan yang terus update setiap hari!
             </p>
         </div>
     );
