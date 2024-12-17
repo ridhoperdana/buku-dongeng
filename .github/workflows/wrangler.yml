@@ -15,5 +15,5 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         with:
           preCommands: npm run build
-          commands: wrangler pages deploy dist
+          command: wrangler pages deploy dist
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
