@@ -257,7 +257,7 @@ const AnimalList = ({ listRef, correctAnimals, isAnimalListVisible }) => {
     );
 };
 
-const AnimalFacts = () => {
+const AnimalFacts = ({ IsMenuOpen }) => {
     const [droppedImages, setDroppedImages] = useState({});
     const [randomizedImageUploader, setRandomizedImageUploader] = useState(getRandomizedImageUploader());
     const listRef = useRef(null);
@@ -267,7 +267,6 @@ const AnimalFacts = () => {
     const [isAnimalListVisible, setIsAnimalListVisible] = useState(false);
     const observerRef = useRef(null);
     const dropAreaRefs = useRef(new Map());
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handlePlaySound = (soundURL) => {
         const audio = new Audio(soundURL);
@@ -320,7 +319,6 @@ const AnimalFacts = () => {
     }, []);
 
     useEffect(() => {
-        
         // Disconnect any existing observer
         if (observerRef.current) {
             observerRef.current.disconnect();
@@ -354,6 +352,12 @@ const AnimalFacts = () => {
             }
         };
     }, [dropAreaRefs.current, isAnimalListVisible]); // Re-initialize when dropAreaRefs change
+
+    useEffect(() => {
+        if (!IsMenuOpen) {
+            setIsAnimalListVisible(true);
+        }
+    }, [IsMenuOpen]);
 
     const Card = ({ animal, cardId }) => {
         const [{ isOver }, drop] = useDrop(() => ({

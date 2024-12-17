@@ -4,10 +4,13 @@ import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend'
 import './index.css';
 import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <DndProvider backend={TouchBackend}>
-        <App />
+        <Router>
+            <App />
+        </Router>
     </DndProvider>
 );
