@@ -10,14 +10,38 @@ import AnimalStory from './AnimalStory';
 const App = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const [showModal, setShowModal] = useState(false);
+
+    const checkDevice = () => {
+        if (window.innerWidth > 768) {
+            setShowModal(true);
+        } else {
+            setShowModal(false);
+        }
+    };
 
     useEffect(() => {
+        checkDevice();
         setIsMenuOpen(false);
     }, [location.pathname]);
 
     return (
             <div className="flex flex-col items-center min-h-screen overflow-hidden">
                 <ToastContainer />
+                {showModal && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                        <div className="bg-white p-8 rounded-xl text-center">
+                            <h2 className="text-xl font-semibold text-blue-600">Akses aplikasi ini di perangkat seluler!</h2>
+                            <p className="mt-4 text-gray-600">Aplikasi ini dioptimalkan untuk penggunaan di ponsel.</p>
+                            <button
+                                onClick={() => setShowModal(false)}
+                                className="bg-blue-500 text-white py-2 px-6 rounded mt-4 hover:bg-blue-400"
+                            >
+                                Tutup
+                            </button>
+                        </div>
+                    </div>
+                )}
                 <div className="w-full p-4 bg-gray-800 text-white shadow-lg flex justify-between items-center">
                     <h1 className="text-xl font-bold">BukuDongeng</h1>
                     <button
