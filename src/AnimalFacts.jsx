@@ -10,9 +10,9 @@ const animalImages = [
     { id: 4, name: "Parrot", src: "/parrot.webp", alt: "Beo" },
     { id: 5, name: "Giraffe", src: "/giraffe.webp", alt: "Jerapah" },
     { id: 6, name: "Elephant", src: "/elephant.webp", alt: "Gajah" },
-    { id: 7, name: "Cat", src: "/cat.jpeg", alt: "Kucing" },
-    { id: 8, name: "Dog", src: "/dog.jpeg", alt: "Anjing" },
-    { id: 9, name: "Duck", src: "/duck.jpeg", alt: "Bebek" },
+    { id: 7, name: "Cat", src: "/cat.webp", alt: "Kucing" },
+    { id: 8, name: "Dog", src: "/dog.webp", alt: "Anjing" },
+    { id: 9, name: "Duck", src: "/duck.webp", alt: "Bebek" },
     // Add more animal images as needed
 ];
 
@@ -429,7 +429,7 @@ const AnimalFacts = ({ IsMenuOpen }) => {
 
     return (
         <div style={{
-            backgroundImage: 'url("/background.jpg")',
+            backgroundImage: 'url("/background.webp")',
             backgroundRepeat: 'repeat',
             backgroundSize: 'auto',
         }} className={`flex flex-col items-center min-h-screen bg-blue-50`}>

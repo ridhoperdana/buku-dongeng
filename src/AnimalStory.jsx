@@ -62,7 +62,7 @@ const AnimalStory = () => {
     return (
         <div
             style={{
-                backgroundImage: 'url("/background.jpg")',
+                backgroundImage: 'url("/background.webp")',
                 backgroundRepeat: 'repeat',
                 backgroundSize: 'auto',
             }}
