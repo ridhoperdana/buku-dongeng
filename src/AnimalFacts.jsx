@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { useDrag, useDrop, useDragLayer } from 'react-dnd';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createClient } from "@supabase/supabase-js";
 
 const animalImages = [
     { id: 1, name: "Lion", src: "/lion.webp", alt: "Singa" },
@@ -267,6 +268,7 @@ const AnimalFacts = ({ IsMenuOpen }) => {
     const [isAnimalListVisible, setIsAnimalListVisible] = useState(false);
     const observerRef = useRef(null);
     const dropAreaRefs = useRef(new Map());
+    const [animals, setAnimals] = useState([]);
 
     const handlePlaySound = (soundURL) => {
         const audio = new Audio(soundURL);
@@ -304,7 +306,15 @@ const AnimalFacts = ({ IsMenuOpen }) => {
         setIsLastVisible(scrollLeft + clientWidth >= scrollWidth);
     };
 
+    const supabase = createClient(import.meta.env.VITE_SUPABASE_PROJECT, import.meta.env.VITE_SUPABASE_TOKEN);
+
+    async function getAnimals() {
+        const { data } = await supabase.from("animals").select("id, name, image_src, sound_src, animal_facts (fact)");
+        setAnimals(data);
+    }
+
     useEffect(() => {
+        getAnimals();
         checkDevice();
 
         const list = listRef.current;

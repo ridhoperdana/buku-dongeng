@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+env:
+  VITE_SUPABASE_TOKEN: ${{ secrets.VITE_SUPABASE_TOKEN }}
+  VITE_SUPABASE_PROJECT: ${{ secrets.VITE_SUPABASE_PROJECT }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
