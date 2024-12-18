@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useLocation, BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +10,10 @@ import AnimalStory from './AnimalStory';
 const App = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+
+    useEffect(() => {
+        setIsMenuOpen(false);
+    }, [location.pathname]);
 
     return (
             <div className="flex flex-col items-center min-h-screen bg-blue-50">

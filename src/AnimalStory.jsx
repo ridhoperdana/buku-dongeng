@@ -76,11 +76,13 @@ const AnimalStory = () => {
             </div>
 
             {stories.map((story) => (
-                <div key={story.id} className='mb-4 flex-grow p-8 w-5/6 max-w-lg p-8 bg-white border-4 flex flex-col items-center mb-4 rounded-xl shadow-lg place-self-center'>
-                    <h1 className="text-2xl font-bold mb-4">{story.animalName}</h1>
-                    {story.stories.map((value, index) => (
-                        <p key={index} className="mt-4">{value}</p>
-                    ))}
+                <div className="w-full" key={story.id}>
+                    <h1 className="text-2xl font-bold mb-4 ml-8">{story.animalName}</h1>
+                    <div className="mb-4 flex flex-row overflow-x-auto w-screen place-self-center">
+                        {story.stories.map((value, index) => (
+                            <div key={value} className='min-w-80 m-4 p-8 bg-white border-4 mb-4 rounded-xl shadow-lg place-self-center'><p key={index}>{value}</p></div>
+                        ))}
+                    </div>
                 </div>
             ))};
 
