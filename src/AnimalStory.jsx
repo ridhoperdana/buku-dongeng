@@ -59,6 +59,19 @@ const stories = [
 ]
 
 const AnimalStory = () => {
+    // Calculate the current story index based on the day of the year
+    const today = new Date();
+    const dayOfYear = Math.floor(
+        (today - new Date(today.getFullYear(), 0, 0)) / 86400000
+    );
+    const storyIndex = dayOfYear % stories.length;
+
+    const story = stories[storyIndex];
+    let lastStoryIndex = stories.length-1;
+    if (storyIndex+1 <= lastStoryIndex) {
+        lastStoryIndex = storyIndex+1
+    }
+    const storiesReturned = [story, stories[lastStoryIndex]]
     return (
         <div
             style={{
@@ -68,15 +81,15 @@ const AnimalStory = () => {
             }}
             className="flex flex-col min-h-screen"
         >
-            <div className="flex-grow p-8">
+            <div className="flex-col p-8">
                 <h2 className="text-2xl font-bold mb-4">Cerita Hewan</h2>
                 <p className="text-gray-700">
                     Yuk baca cerita hewan yang terus update setiap hari!
                 </p>
             </div>
 
-            {stories.map((story) => (
-                <div className="w-full" key={story.id}>
+            {storiesReturned.map((story) => (
+                <div className="w-full flex-grow place-self-center" key={story.id}>
                     <div className="bg-green-50 rounded-xl ml-8">
                         <h1 className="text-2xl font-bold pt-4 pl-6">{story.animalName}</h1>
                         <div className="mb-4 flex flex-row overflow-x-auto w-screen place-self-center no-scrollbar">
@@ -84,13 +97,13 @@ const AnimalStory = () => {
                                 <div key={value}
                                      className='min-w-80 m-4 p-8 bg-white border-4 mb-4 rounded-xl shadow-lg place-self-center'>
                                     <p key={index}>{value}</p>
-                                    <p className="place-self-end text-gray-400">{index+1}</p>
+                                    <p className="place-self-end text-gray-400">{index + 1}</p>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-            ))};
+            ))}
 
             <footer className="w-full bg-gray-800 text-white text-center py-4 p-4">
                 <p className="text-sm">
@@ -103,7 +116,7 @@ const AnimalStory = () => {
                 <p className="text-sm">
                     Web dibuat oleh{' '}
                     <a href="https://ridho.work" className="underline">
-                    Ridho Perdana
+                        Ridho Perdana
                     </a>
                 </p>
             </footer>
