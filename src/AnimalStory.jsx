@@ -77,11 +77,17 @@ const AnimalStory = () => {
 
             {stories.map((story) => (
                 <div className="w-full" key={story.id}>
-                    <h1 className="text-2xl font-bold mb-4 ml-8">{story.animalName}</h1>
-                    <div className="mb-4 flex flex-row overflow-x-auto w-screen place-self-center">
-                        {story.stories.map((value, index) => (
-                            <div key={value} className='min-w-80 m-4 p-8 bg-white border-4 mb-4 rounded-xl shadow-lg place-self-center'><p key={index}>{value}</p></div>
-                        ))}
+                    <div className="bg-green-50 rounded-xl ml-8">
+                        <h1 className="text-2xl font-bold pt-4 pl-6">{story.animalName}</h1>
+                        <div className="mb-4 flex flex-row overflow-x-auto w-screen place-self-center no-scrollbar">
+                            {story.stories.map((value, index) => (
+                                <div key={value}
+                                     className='min-w-80 m-4 p-8 bg-white border-4 mb-4 rounded-xl shadow-lg place-self-center'>
+                                    <p key={index}>{value}</p>
+                                    <p className="place-self-end text-gray-400">{index+1}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             ))};
@@ -97,7 +103,7 @@ const AnimalStory = () => {
                 <p className="text-sm">
                     Web dibuat oleh{' '}
                     <a href="https://ridho.work" className="underline">
-                        Ridho Perdana
+                    Ridho Perdana
                     </a>
                 </p>
             </footer>

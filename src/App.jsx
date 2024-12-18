@@ -16,7 +16,7 @@ const App = () => {
     }, [location.pathname]);
 
     return (
-            <div className="flex flex-col items-center min-h-screen bg-blue-50">
+            <div className="flex flex-col items-center min-h-screen overflow-hidden">
                 <ToastContainer />
                 <div className="w-full p-4 bg-gray-800 text-white shadow-lg flex justify-between items-center">
                     <h1 className="text-xl font-bold">BukuDongeng</h1>
