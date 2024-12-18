@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Import your components
 import AnimalFacts from './AnimalFacts';
 import AnimalStory from './AnimalStory';
+import Marketplace from "./Marketplace.jsx";
 
 const App = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -71,6 +72,16 @@ const App = () => {
                         }`}>
                                 Cerita Hewan
                             </Link>
+                            <Link to="/marketplace" className={`block py-2 px-4 ${
+                                location.pathname === "/marketplace" ? "bg-gray-800 text-white" : "text-gray-400"
+                            }`}>
+                                Beli Mainan
+                            </Link>
+                            <Link to="/membership" className={`block py-2 px-4 ${
+                                location.pathname === "/membership" ? "bg-gray-800 text-white" : "text-gray-400"
+                            }`}>
+                                Mulai Berlangganan
+                            </Link>
                         </div>
                     </div>
                 )}
@@ -78,6 +89,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<AnimalFacts isMenuOpen={isMenuOpen} IsMenuOpen={isMenuOpen} />} />
                     <Route path="/story" element={<AnimalStory />} />
+                    <Route path="/marketplace" element={<Marketplace />} />
                 </Routes>
             </div>
     );
